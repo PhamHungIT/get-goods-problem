@@ -11,13 +11,13 @@ import time
 
 if __name__ == "__main__":
 
-    time_begin = time.time()
     parser = ArgumentParser(add_help=False)
     parser.add_argument("--dataset", type=str)
     parser.add_argument("--num_epoch", default=100, type=int)
     parser.add_argument("--pop_size", default=1000, type=int)
     param = parser.parse_args()
 
+    time_begin = time.time()
     ga_model = model()
 
     ga_model.compile(
@@ -31,8 +31,12 @@ if __name__ == "__main__":
     num_generations=param.num_epoch,
     num_individuals=param.pop_size
     )
-    
+    print("INFO - DATA:")
+    data = Load()
+    data(param.dataset)
+    print(data)
     print(f"\nGENETIC ALGORITHM: \n\t+ Population: {param.pop_size} individuals\n\t+ Number generations: {param.num_epoch}")
+    print("\n\tSolution:")
     print(solution)
     print(f"Time taken: {round(time.time() - time_begin, 2)}")
 

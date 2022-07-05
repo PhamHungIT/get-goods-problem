@@ -12,7 +12,6 @@ if __name__ == "__main__":
     
     data = Load()
     data(param.dataset)
-    # data("library/data/txt_data/case_5.txt")
 
     N = data.num_kinds
     M = data.num_bins
@@ -39,7 +38,7 @@ if __name__ == "__main__":
                         if cost + d[X[k],0] < min_cost:
                             min_cost = cost + d[X[k],0]
                             solution = np.copy(X[:k+1])
-                            print(f"Update {update_time}: \nPath: {solution} - Cost: {min_cost} \n")
+                            print(f"Update {update_time}: \nPath: {np.append(solution,0)} - Cost: {min_cost} \n")
                             update_time+=1
                             history_cost.append(min_cost)
                     else:
@@ -53,4 +52,12 @@ if __name__ == "__main__":
     X[0] = 0
     time_begin = time.time()
     Try(1)
-    print(f"Time taken: {round(time.time() - time_begin, 2)}")
+
+
+    print("\n\nINFO - DATA:")
+    print(data)
+    print("\nBRANCH & BOUND ALGORITHM:")
+    print(f"\t+ Time taken: {round(time.time() - time_begin, 2)}")
+    print(f"\t+ Path: {np.append(solution,0)} - Cost: {min_cost} \n")
+    
+
