@@ -27,7 +27,7 @@ class Individual:
             self.fcost = cost + data.mat_dis[self[len(self)-1]][0]
         return self.fcost
     def __repr__(self):
-        return f"\nGenes: {self.genes}\nFactorial cost: {self.fcost}\nSolution: {self.solution}\n"
+        return f"\nGenes: {self.genes}\nFactorial cost: {self.fcost}\nPath: {np.append(self.solution,0)}\n"
 
 class Population:
     def __init__(self, num_individual: int, dim: int, data: Load, eval_initial = False, seed=None):

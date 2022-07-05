@@ -14,7 +14,7 @@ class model(AbstractModel):
         crossover: crossover.OX_Crossover, mutation: mutation.SwapMutation, selection: selection.ElitismSelection):
         return super().compile(data_loc, crossover, mutation, selection)
 
-    def fit(self, num_generations: int, num_individuals: int, prob_crossover= 0.7, prob_mutation = 0.1, *args, **kwargs):
+    def fit(self, num_generations: int, num_individuals: int, prob_crossover= 0.7, prob_mutation = 0.3, *args, **kwargs):
         super().fit(*args, **kwargs)
 
         self.res = []
@@ -55,10 +55,11 @@ class model(AbstractModel):
 
             population = population + offsprings
             population.update_rank()
-            self.res.append(population.get_best().fcost)
-            print(f"Epoch {epoch+1}:\n{population.get_best().solution} - {population.get_best().fcost}")
-
+            best_indiv = population.get_best()
+            self.res.append(best_indiv.fcost)
+            print(f"Epoch {epoch+1}:\n{best_indiv.solution} - {best_indiv.fcost}")
+            
             population = self.selection(population, num_individuals)
-        return population.get_best()
+        return best_indiv
         
 
