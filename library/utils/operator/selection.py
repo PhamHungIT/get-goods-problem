@@ -6,7 +6,7 @@ from ...EA import *
 class AbstractSelection():
     def __init__(self, *args, **kwds) -> None:
         pass
-    def __call__(self, population:Population, nb_inds_tasks:list, *args, **kwds) -> list[int]:
+    def __call__(self, population:Population, nb_inds_tasks:list, *args, **kwds):
         pass
 
 class ElitismSelection(AbstractSelection):

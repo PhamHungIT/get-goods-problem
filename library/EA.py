@@ -57,7 +57,7 @@ class Population:
             self.ranking = np.argsort(np.argsort(self.cost_pop))
     def get_best(self) -> Individual:
         return self[np.argmin(self.cost_pop)]
-    def get_parents(self, num_indiv:int) -> list[Individual]:
+    def get_parents(self, num_indiv:int):
         list_indiv = []
         for i in range(num_indiv):
             list_indiv.append(self[np.random.randint(len(self))])
