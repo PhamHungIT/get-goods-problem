@@ -24,14 +24,14 @@ class Load:
             self.mat_dis[line, :] = np.array(data.readline().split(), dtype=int)
 
         self.order = np.array(data.readline().split(), dtype=int)
-        self.solution_path = np.array(data.readline().split(), dtype=int)
-        self.min_cost = int(data.readline())
+        # self.solution_path = np.array(data.readline().split(), dtype=int)
+        # self.min_cost = int(data.readline())
 
     def __repr__(self) -> str:
         return f"\t+ Number of the categories goods is {self.num_kinds}.\
         \n\t+ Number of the bins is {self.num_bins}   \
         \n\t+ Matrix Q - {self.num_kinds}x{self.num_bins} save information of the goods position and bins with {self.num_kinds} categories goods and {self.num_bins} bins.\
         \n\t+ Matrix d - {self.num_bins + 1}x{self.num_bins + 1} save distance between bins\
-        \n\t+ q size {len(self.order)} is array save the orders with each category goods: {self.order}\
-        \n\t+ Shortest path: {self.solution_path}\
-        \n\t+ Cost: {self.min_cost}"
+        \n\t+ q size {len(self.order)} is array save the orders with each category goods: {self.order}"
+        # \n\t+ Shortest path: {self.solution_path}\
+        # \n\t+ Cost: {self.min_cost}"
