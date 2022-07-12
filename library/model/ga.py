@@ -57,7 +57,7 @@ class model(AbstractModel):
             population.update_rank()
             best_indiv = population.get_best()
             self.res.append(best_indiv.fcost)
-            self.render_process(epoch/num_generations, ['Cost', 'Path'], [best_indiv.fcost, best_indiv.solution], use_sys= True)
+            self.render_process(epoch/num_generations, ['Cost', 'Path'], [best_indiv.fcost, best_indiv.solution], use_sys=True)
 
             # print(f"\tEpoch {epoch+1}: {best_indiv.fcost}")
             # print(f"Epoch {epoch+1}:\n{best_indiv.solution} - {best_indiv.fcost}")

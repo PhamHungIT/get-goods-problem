@@ -64,8 +64,6 @@ class AbstractModel:
         for i in range(len(list_desc)):
             desc = str("")
             desc = desc + f"{list_value[i]}" + " "
-            # desc = desc + str("%d " % (list_value[i])) + " "
-
             line = '{}: {}  '.format(list_desc[i], desc)
             if use_sys is True: 
                 print_line = print_line + line 
