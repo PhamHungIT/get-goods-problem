@@ -1,13 +1,13 @@
-from lib2to3.pgen2.tokenize import generate_tokens
-from typing import List
-import numpy as np
-
 from library.EA import Individual, Population
-
 from .abstract_model import AbstractModel
 from ..utils.operator import crossover, mutation, selection
 from ..utils.load_data import Load
 
+from tqdm import trange
+import tqdm
+import numpy as np
+import os
+import sys
 class model(AbstractModel):
     def compile(self, 
         data_loc: str, 
@@ -57,7 +57,11 @@ class model(AbstractModel):
             population.update_rank()
             best_indiv = population.get_best()
             self.res.append(best_indiv.fcost)
-            print(f"Epoch {epoch+1}:\n{best_indiv.solution} - {best_indiv.fcost}")
+            self.render_process(epoch/num_generations, ['Cost', 'Path'], [best_indiv.fcost, best_indiv.solution], use_sys= True)
+
+            # print(f"\tEpoch {epoch+1}: {best_indiv.fcost}")
+            # print(f"Epoch {epoch+1}:\n{best_indiv.solution} - {best_indiv.fcost}")
+            
             
             population = self.selection(population, num_individuals)
         return best_indiv

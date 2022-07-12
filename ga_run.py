@@ -42,6 +42,7 @@ if __name__ == "__main__":
 
 
     plt.plot(ga_model.res)
+    plt.title("Convergence process")
     plt.xlabel("Epoch")
     plt.ylabel("Cost")
     plt.show()

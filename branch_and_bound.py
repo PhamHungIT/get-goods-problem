@@ -1,5 +1,6 @@
 import numpy as np
 import time
+import os
 
 from library.utils.load_data import Load
 from argparse import ArgumentParser
@@ -38,7 +39,9 @@ if __name__ == "__main__":
                         if cost + d[X[k],0] < min_cost:
                             min_cost = cost + d[X[k],0]
                             solution = np.copy(X[:k+1])
-                            print(f"Update {update_time}: \nPath: {np.append(solution,0)} - Cost: {min_cost} \n")
+                            os.system("CLS")
+                            print(f"Update {update_time}: - Cost: {min_cost}")
+                            print(f"\t   - Path: {np.append(solution,0)}\n")
                             update_time+=1
                             history_cost.append(min_cost)
                     else:
