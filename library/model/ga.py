@@ -14,7 +14,7 @@ class model(AbstractModel):
         crossover: crossover.OX_Crossover, mutation: mutation.SwapMutation, selection: selection.ElitismSelection):
         return super().compile(data_loc, crossover, mutation, selection)
 
-    def fit(self, num_generations: int, num_individuals: int, prob_crossover= 0.7, prob_mutation = 0.3, *args, **kwargs):
+    def fit(self, num_generations: int, num_individuals: int, prob_crossover, prob_mutation, *args, **kwargs):
         super().fit(*args, **kwargs)
 
         self.res = []

@@ -15,8 +15,17 @@ if __name__ == "__main__":
     parser.add_argument("--dataset", type=str)
     parser.add_argument("--num_epoch", default=100, type=int)
     parser.add_argument("--pop_size", default=1000, type=int)
-    param = parser.parse_args()
+    parser.add_argument("--prob_m", default=0.2, type=float)
+    parser.add_argument("--prob_c", default=0.7, type=float)
 
+
+    param = parser.parse_args()
+    print("INFO - DATA:")
+    data = Load()
+    data(param.dataset)
+    print(data)
+    print(f"\nGENETIC ALGORITHM: \n\t+ Population: {param.pop_size} individuals\n\t+ Number generations: {param.num_epoch} \
+        \n\t+ Probability crossover: {param.prob_c}\n\t+ Probability mutation: {param.prob_m}\n")
     time_begin = time.time()
     ga_model = model()
 
@@ -29,14 +38,12 @@ if __name__ == "__main__":
 
     solution = ga_model.fit(
     num_generations=param.num_epoch,
-    num_individuals=param.pop_size
+    num_individuals=param.pop_size,
+    prob_crossover=param.prob_c,
+    prob_mutation=param.prob_m
     )
-    print("INFO - DATA:")
-    data = Load()
-    data(param.dataset)
-    print(data)
-    print(f"\nGENETIC ALGORITHM: \n\t+ Population: {param.pop_size} individuals\n\t+ Number generations: {param.num_epoch}")
-    print("\n\tSolution:")
+    
+    print("\n\nFinished:")
     print(solution)
     print(f"Time taken: {round(time.time() - time_begin, 2)}")
 
