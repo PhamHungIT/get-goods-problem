@@ -59,31 +59,29 @@ class OX_Crossover(AbstractCrossover):
         p1 = parent1.genes[1:]
         p2 = parent2.genes[1:]
         dim = len(p1)
-        i1 = np.random.randint(dim - 1)
-        i2 = np.random.randint(i1 + 1, dim)
-        print(f"Cut {i1}, {i2}")
+        i1 = np.random.randint(dim - 2)
+        i2 = np.random.randint(i1 + 1, dim-1)
         o1 = np.zeros(dim, dtype=int)
         o2 = np.zeros(dim, dtype=int)
-
         o1[i1 : i2] = p1[i1 : i2]
         temp2 = list(p2[i2:]) + list(p2[:i2])
         i = 0
         for g2 in temp2:
             if g2 not in o1:
-                o1[i] = g2
-                i += 1
                 if i == i1:
                     i = i2
+                o1[i] = g2
+                i += 1
 
         o2[i1 : i2] = p2[i1 : i2]
         temp1 = list(p1[i2:]) + list(p1[:i2])
         i = 0
         for g1 in temp1:
             if g1 not in o2:
-                o2[i] = g1
-                i += 1
                 if i == i1:
                     i = i2
+                o2[i] = g1
+                i += 1
 
         offspring1 = Individual(dim + 1)
         offspring2 = Individual(dim + 1)

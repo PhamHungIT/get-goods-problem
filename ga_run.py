@@ -1,6 +1,6 @@
 from library.EA import *
 from library.utils.operator.selection import ElitismSelection
-from library.utils.operator.crossover import OX_Crossover
+from library.utils.operator.crossover import OX_Crossover,Two_Cut_Crossover
 from library.utils.operator.mutation import SwapMutation
 from library.model.ga import model
 from library.utils.load_data import Load
@@ -39,7 +39,7 @@ if __name__ == "__main__":
 
         ga_model.compile(
             data_loc=param.dataset,
-            crossover=OX_Crossover(),
+            crossover=Two_Cut_Crossover(),
             mutation=SwapMutation(),
             selection=ElitismSelection()
         )

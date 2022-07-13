@@ -11,7 +11,7 @@ import sys
 class model(AbstractModel):
     def compile(self, 
         data_loc: str, 
-        crossover: crossover.OX_Crossover, mutation: mutation.SwapMutation, selection: selection.ElitismSelection):
+        crossover: crossover.AbstractCrossover, mutation: mutation.SwapMutation, selection: selection.ElitismSelection):
         return super().compile(data_loc, crossover, mutation, selection)
 
     def fit(self, num_generations: int, num_individuals: int, prob_crossover, prob_mutation, *args, **kwargs):
