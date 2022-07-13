@@ -17,6 +17,7 @@ class Individual:
         for i in range(len(self)-1):
             if np.all(curr_collected >= data.order):
                 self.solution = np.copy(self.genes[:i+1])
+                self.solution = np.append(self.solution,0)
                 self.fcost = cost + data.mat_dis[self[i]][0]
                 return self.fcost
             # print(self)
@@ -25,11 +26,12 @@ class Individual:
         if np.all(curr_collected >= data.order):
             self.solution = np.copy(self.genes)
             self.fcost = cost + data.mat_dis[self[len(self)-1]][0]
+            self.solution = np.append(self.solution,0)
         return self.fcost
     def __repr__(self):
         return f"\t+ Genes: {self.genes}\
                 \n\t+ Factorial cost: {self.fcost}\
-                \n\t+ Path: {np.append(self.solution,0)}\n"
+                \n\t+ Path: {self.solution}\n"
 
 class Population:
     def __init__(self, num_individual: int, dim: int, data: Load, eval_initial = False, seed=None):

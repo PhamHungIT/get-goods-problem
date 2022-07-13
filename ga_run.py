@@ -32,10 +32,9 @@ if __name__ == "__main__":
 
     sum_cost = 0
     sum_time = 0
-    print("LOADING...")
+    print("LOADING...\n")
     for num_run in range(param.num_run):
         time_begin = time.time()
-        print(f"Run {num_run + 1}/{param.num_run}: ")
         ga_model = model()
 
         ga_model.compile(
@@ -50,8 +49,8 @@ if __name__ == "__main__":
         prob_crossover=param.prob_c,
         prob_mutation=param.prob_m
         )
-        print(f"\nComplete {num_run+1}/{param.num_run}")
-        print(solution)
+        print(f"\nComplete: {num_run+1}/{param.num_run}!\n")
+        # print(solution)
 
         sum_time += round(time.time() - time_begin, 2)
         sum_cost += solution.fcost
