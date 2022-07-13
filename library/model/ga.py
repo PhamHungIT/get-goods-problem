@@ -48,6 +48,9 @@ class model(AbstractModel):
                 if generate_new_individual:
                     offsprings.__addIndividual__(o1)
                     offsprings.__addIndividual__(o2)
+                else:
+                    offsprings.__addIndividual__(p1)
+                    offsprings.__addIndividual__(p2)
             
             # Merge and update rank
             # for i in offsprings.list_indiv:
