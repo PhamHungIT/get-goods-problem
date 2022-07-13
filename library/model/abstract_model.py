@@ -66,7 +66,7 @@ class AbstractModel:
             if i < len(list_desc) - 1:
                 desc = desc + f"{list_value[i]}" + " -"
             else:
-                desc = desc + f"{list_value[i]}" + " "
+                desc = desc + f"{list_value[i]}" + "    "
             line = '{}: {}  '.format(list_desc[i], desc)
             if use_sys is True: 
                 print_line = print_line + line 
