@@ -40,10 +40,10 @@ class model(AbstractModel):
                 if np.random.rand() < prob_crossover:
                     o1, o2 = self.crossover(parent1=p1, parent2=p2)
                     generate_new_individual = True
-                elif np.random.rand() < prob_mutation:
-                    o1 = self.mutation(p1)
-                    o2 = self.mutation(p2)
-                    generate_new_individual = True
+                    if np.random.rand() < prob_mutation:
+                        o1 = self.mutation(o1)
+                        o2 = self.mutation(o2)
+                        generate_new_individual = True
                 
                 if generate_new_individual:
                     offsprings.__addIndividual__(o1)
