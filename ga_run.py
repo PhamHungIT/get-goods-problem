@@ -22,10 +22,12 @@ if __name__ == "__main__":
     parser.add_argument("--prob_c", default=0.7, type=float)
     parser.add_argument("--num_run", default=1, type=int )
     parser.add_argument("--ox_crossover", action='store_true')
+    parser.add_argument("--random_seed", action='store_true')
+
 
 
     param = parser.parse_args()
-    print("INFO - DATA:")
+    print("\nINFO - DATA:")
     data = Load()
     data(param.dataset)
     print(data)
@@ -38,10 +40,14 @@ if __name__ == "__main__":
     print(f"\t+ Crossover: {type(crossover).__name__}")
     sum_cost = 0
     sum_time = 0
-    print("LOADING...\n")
+    print("\nLOADING...")
     for num_run in range(param.num_run):
         time_begin = time.time()
-        ga_model = model()
+        if param.random_seed:
+            seed=None
+        else:
+            seed = num_run
+        ga_model = model(seed=seed)
 
         ga_model.compile(
             data_loc=param.dataset,
