@@ -14,7 +14,7 @@ class model(AbstractModel):
         crossover: crossover.AbstractCrossover, mutation: mutation.SwapMutation, selection: selection.ElitismSelection):
         return super().compile(data_loc, crossover, mutation, selection)
 
-    def fit(self, num_generations: int, num_individuals: int, prob_crossover, prob_mutation, *args, **kwargs):
+    def fit(self, num_generations: int, num_individuals: int, prob_crossover, prob_mutation, max_render, *args, **kwargs):
         super().fit(*args, **kwargs)
 
         self.res = []
@@ -53,14 +53,16 @@ class model(AbstractModel):
                     offsprings.__addIndividual__(p2)
             
             # Merge and update rank
-            # for i in offsprings.list_indiv:
-            #     print(len(i))
 
             population = population + offsprings
             population.update_rank()
             best_indiv = population.get_best()
             self.res.append(best_indiv.fcost)
-            self.render_process(epoch/num_generations, ['Epoch', 'Cost', 'Path'], [f"{epoch+1}/{num_generations}", best_indiv.fcost, best_indiv.solution], use_sys=True)
+            if len(best_indiv.solution) > max_render:
+                render_best = " ".join(map(str, best_indiv.solution[:max_render//3])) + " . . . " + " ".join(map(str,best_indiv.solution[-(max_render - 3 - max_render//3):]))
+            else:
+                render_best = " ".join(map(str, best_indiv.solution))
+            self.render_process(epoch/num_generations, ['Epoch', 'Cost', 'Path'], [f"{epoch+1}/{num_generations}", best_indiv.fcost, render_best], use_sys=True)
 
             # print(f"\tEpoch {epoch+1}: {best_indiv.fcost}")
             # print(f"Epoch {epoch+1}:\n{best_indiv.solution} - {best_indiv.fcost}")

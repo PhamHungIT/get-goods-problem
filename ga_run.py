@@ -21,8 +21,10 @@ if __name__ == "__main__":
     parser.add_argument("--prob_m", default=0.2, type=float)
     parser.add_argument("--prob_c", default=0.7, type=float)
     parser.add_argument("--num_run", default=1, type=int )
+    parser.add_argument("--max_render", default=5, type=int)
     parser.add_argument("--ox_crossover", action='store_true')
     parser.add_argument("--random_seed", action='store_true')
+
 
 
 
@@ -59,7 +61,8 @@ if __name__ == "__main__":
         num_generations=param.num_epoch,
         num_individuals=param.pop_size,
         prob_crossover=param.prob_c,
-        prob_mutation=param.prob_m
+        prob_mutation=param.prob_m,
+        max_render=param.max_render
         )
         print(f"\nComplete: {num_run+1}/{param.num_run}!\n")
         # print(solution)
