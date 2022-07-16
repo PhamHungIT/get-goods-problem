@@ -1,3 +1,4 @@
+from audioop import cross
 from library.EA import *
 from library.utils.operator.selection import ElitismSelection
 from library.utils.operator.crossover import OX_Crossover,Two_Cut_Crossover
@@ -20,6 +21,7 @@ if __name__ == "__main__":
     parser.add_argument("--prob_m", default=0.2, type=float)
     parser.add_argument("--prob_c", default=0.7, type=float)
     parser.add_argument("--num_run", default=1, type=int )
+    parser.add_argument("--ox_crossover", action='store_true')
 
 
     param = parser.parse_args()
@@ -28,8 +30,12 @@ if __name__ == "__main__":
     data(param.dataset)
     print(data)
     print(f"\nGENETIC ALGORITHM: \n\t+ Population: {param.pop_size} individuals\n\t+ Number generations: {param.num_epoch} \
-        \n\t+ Probability crossover: {param.prob_c}\n\t+ Probability mutation: {param.prob_m}\n")
+        \n\t+ Probability crossover: {param.prob_c}\n\t+ Probability mutation: {param.prob_m}")
 
+    crossover = Two_Cut_Crossover()
+    if param.ox_crossover:
+        crossover = OX_Crossover()
+    print(f"\t+ Crossover: {type(crossover).__name__}")
     sum_cost = 0
     sum_time = 0
     print("LOADING...\n")
@@ -39,7 +45,7 @@ if __name__ == "__main__":
 
         ga_model.compile(
             data_loc=param.dataset,
-            crossover=Two_Cut_Crossover(),
+            crossover=crossover,
             mutation=SwapMutation(),
             selection=ElitismSelection()
         )
@@ -55,10 +61,12 @@ if __name__ == "__main__":
         sum_time += round(time.time() - time_begin, 2)
         sum_cost += solution.fcost
         if (num_run == 0):
+            history_cost = ga_model.res
             best_solution = solution
             worst_solution = solution
         else:
             if (solution.fcost < best_solution.fcost):
+                history_cost = ga_model.res
                 best_solution = solution
             elif (solution.fcost > worst_solution.fcost):
                 worst_solution = solution
@@ -75,8 +83,8 @@ if __name__ == "__main__":
     seconds = seconds - minutes * 60 
     display("  - Average of time: %02dm %2.02fs "%(minutes, seconds))
 
-    # plt.plot(ga_model.res)
-    # plt.title("Convergence process")
-    # plt.xlabel("Epoch")
-    # plt.ylabel("Cost")
-    # plt.show()
+    plt.plot(history_cost)
+    plt.title(f"Convergence process - {type(crossover).__name__}")
+    plt.xlabel("Epoch")
+    plt.ylabel("Cost")
+    plt.show()
